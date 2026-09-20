@@ -1,0 +1,4 @@
+set,selected_threshold,tp,fp,fn,tn,cost,counters_match,selected_match
+A,0.4,2,2,0,2,2,True,True
+B,inf,0,0,0,3,0,True,True
+C,0.8,1,0,1,11,10,True,True
