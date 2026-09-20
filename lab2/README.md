@@ -15,6 +15,12 @@ uv run python analyze_thresholds.py --saved results
 
 Перша команда навчає модель один раз і зберігає ваги, індекси поділу, мітки та оцінки. Друга працює тільки зі збереженими прогнозами, без CSV і без повторного навчання.
 
+Для захисту є `lab2.ipynb`. Він використовує збережені прогнози, показує таблиці, графіки та помилки без повторного навчання. Запуск з цієї теки:
+
+```powershell
+uv run --with jupyter --with ipykernel jupyter notebook
+```
+
 Поділ є стратифікованим 60/20/20 з `random_state=0`, scaler навчається тільки на train. Модель: `Linear(29,32) -> ReLU -> Linear(32,1)`, `BCEWithLogitsLoss`, Adam `lr=1e-3`, 12 епох, batch 1024, CPU, `float32`.
 
 ## Поріг

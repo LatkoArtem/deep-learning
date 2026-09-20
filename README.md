@@ -8,6 +8,9 @@
 Для запуску потрібен `creditcard.csv` з колонками `V1 ... V28`, `Amount` і `Class`.
 Файл даних не додається до репозиторію.
 
+У кожній теці також є Jupyter notebook для покрокової демонстрації:
+`lab1/lab1.ipynb` і `lab2/lab2.ipynb`.
+
 ```powershell
 cd lab1
 uv sync
@@ -18,6 +21,12 @@ cd ..\lab2
 uv sync
 uv run python lab2_starter.py --data ..\creditcard.csv --out results
 uv run python analyze_thresholds.py --saved results
+```
+
+Notebook можна відкрити з відповідної теки так:
+
+```powershell
+uv run --with jupyter --with ipykernel jupyter notebook
 ```
 
 Репозиторій: https://github.com/LatkoArtem/deep-learning
