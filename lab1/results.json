@@ -1,0 +1,63 @@
+{
+  "wrong_gradient": false,
+  "train_shape": [
+    105,
+    4
+  ],
+  "test_shape": [
+    45,
+    4
+  ],
+  "train_class_counts": [
+    35,
+    35,
+    35
+  ],
+  "test_class_counts": [
+    15,
+    15,
+    15
+  ],
+  "numpy_loss": 1.4562007801142816,
+  "torch_loss": 1.4562007801142818,
+  "loss_absolute_difference": 2.220446049250313e-16,
+  "gradient_max_absolute_differences": {
+    "W1": 2.7755575615628914e-17,
+    "b1": 3.9898639947466563e-17,
+    "W2": 5.551115123125783e-17,
+    "b2": 1.3877787807814457e-16
+  },
+  "torch_check_passed": true,
+  "numerical_checks": [
+    {
+      "parameter": "W1(0, 0)",
+      "manual": -0.019920184330555316,
+      "numerical": -0.019920184390898044,
+      "absolute_difference": 6.03427273426771e-11,
+      "passed": true
+    },
+    {
+      "parameter": "b1(0,)",
+      "manual": -0.07056611158437998,
+      "numerical": -0.0705661116207068,
+      "absolute_difference": 3.632683043264251e-11,
+      "passed": true
+    },
+    {
+      "parameter": "W2(0, 0)",
+      "manual": 0.13523020860547605,
+      "numerical": 0.13523020869765645,
+      "absolute_difference": 9.218040220027035e-11,
+      "passed": true
+    },
+    {
+      "parameter": "b2(0,)",
+      "manual": 0.08552164484195578,
+      "numerical": 0.08552164498798476,
+      "absolute_difference": 1.460289805743642e-10,
+      "passed": true
+    }
+  ],
+  "numerical_check_passed": true,
+  "wrong_gradient_detected": false
+}

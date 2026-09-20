@@ -11,3 +11,5 @@ lab2/results/
 *.pt
 *.npz
 
+!lab2/results/
+!lab2/results/**
