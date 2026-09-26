@@ -214,7 +214,6 @@ def save_errors(
         [all_errors[all_errors["error"] == name].head(5) for name in ("FP", "FN")],
         ignore_index=True,
     ).sort_values(["error", "csv_row"])
-    all_errors.to_csv(out / "test_errors_all.csv", index=False)
     selected.to_csv(out / "test_errors.csv", index=False)
     return all_errors, selected
 

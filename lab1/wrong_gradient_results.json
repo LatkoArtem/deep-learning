@@ -27,6 +27,7 @@
     "W2": 34.193432939632565,
     "b2": 11.197086181821382
   },
+  "finite_values_passed": true,
   "torch_check_passed": false,
   "numerical_checks": [
     {

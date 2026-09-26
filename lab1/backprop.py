@@ -169,10 +169,22 @@ def run_checks(wrong_gradient: bool) -> dict[str, object]:
     differences = max_differences(numpy_gradients, torch_gradients)
     numerical = numerical_checks(parameters, x_train, y_train, numpy_gradients)
 
-    correct_torch_check = abs(numpy_loss - torch_loss) <= TORCH_TOLERANCE and all(
+    finite_values = bool(
+        np.isfinite([numpy_loss, torch_loss, *differences.values()]).all()
+        and all(
+            np.isfinite(getattr(gradient, name)).all()
+            for gradient in (numpy_gradients, torch_gradients)
+            for name in ("W1", "b1", "W2", "b2")
+        )
+        and all(
+            np.isfinite([row["manual"], row["numerical"], row["absolute_difference"]]).all()
+            for row in numerical
+        )
+    )
+    correct_torch_check = finite_values and abs(numpy_loss - torch_loss) <= TORCH_TOLERANCE and all(
         value <= TORCH_TOLERANCE for value in differences.values()
     )
-    numerical_check = all(row["passed"] for row in numerical)
+    numerical_check = finite_values and all(row["passed"] for row in numerical)
     result = {
         "wrong_gradient": wrong_gradient,
         "train_shape": list(x_train.shape),
@@ -183,6 +195,7 @@ def run_checks(wrong_gradient: bool) -> dict[str, object]:
         "torch_loss": torch_loss,
         "loss_absolute_difference": abs(numpy_loss - torch_loss),
         "gradient_max_absolute_differences": differences,
+        "finite_values_passed": finite_values,
         "torch_check_passed": bool(correct_torch_check),
         "numerical_checks": numerical,
         "numerical_check_passed": bool(numerical_check),
