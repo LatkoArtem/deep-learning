@@ -1,37 +1,25 @@
-# Лабораторні роботи 1 і 2
+# Deep Learning Labs
 
-У репозиторії дві роботи:
+Репозиторій містить виконання лабораторних робіт з курсу **Deep Learning**.
 
-- `lab1` — ручний backpropagation для Iris із перевіркою PyTorch і чисельною похідною;
-- `lab2` — підбір порога для Credit Card Fraud Detection за вартістю `C = 10 * FN + FP`.
+## Структура робіт
 
-Для запуску потрібен `creditcard.csv` з колонками `V1 ... V28`, `Amount` і `Class`.
-Файл даних не додається до репозиторію.
+- **[`lab1`](./lab1)** — Ручна реалізація алгоритму Backpropagation (Iris dataset), верифікація результатів з PyTorch та чисельним градієнтом.
+- **[`lab2`](./lab2)** — Двійкова класифікація незбалансованих даних (Credit Card Fraud Detection), підбір оптимального порогу класифікації за матрицею вартості.
 
-У кожній теці також є Jupyter notebook для покрокової демонстрації:
-`lab1/lab1.ipynb` і `lab2/lab2.ipynb`.
+> Детальний опис завдання, архітектури та інструкції до запуску знаходяться у `README.md` відповідної папки кожної роботи.
+
+## Запуск та оточення
+
+Для керування залежностями використовується [`uv`](https://github.com/astral-sh/uv). Перейдіть у теку потрібної лабораторної роботи:
 
 ```powershell
-cd lab1
+cd lab1  # або cd lab2
 uv sync
-uv run python backprop.py
-uv run python backprop.py --wrong-gradient
-
-cd ..\lab2
-uv sync
-uv run python lab2_starter.py --data ..\creditcard.csv --out results
-uv run python analyze_thresholds.py --saved results
 ```
 
-Notebook можна відкрити з відповідної теки так:
+Запуск Jupyter Notebook:
 
 ```powershell
 uv run --with jupyter --with ipykernel jupyter notebook
-```
-
-Репозиторій: https://github.com/LatkoArtem/deep-learning
-
-```powershell
-git remote -v
-git push -u origin main
 ```
