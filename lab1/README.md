@@ -68,7 +68,7 @@ $$
 
 $$
 \begin{aligned}
-m_i &= \max_{k\in\{0,1,2\}} (Z_2)_{ik},\\
+m_i &= \max_{k\in\lbrace 0,1,2\rbrace } (Z_2)_{ik},\\
 \log P_{ij} &=
 (Z_2)_{ij}-m_i
 -\log\left(\sum_{k=0}^{2}\exp\big((Z_2)_{ik}-m_i\big)\right),\\

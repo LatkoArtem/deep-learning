@@ -101,16 +101,16 @@ $$
 Пропущена шахрайська транзакція коштує вдесятеро дорожче за хибну тривогу:
 
 $$
-C(t)=10\,\mathrm{FN}(t)+\mathrm{FP}(t).
+C(t)=10\cdot \mathrm{FN}(t)+\mathrm{FP}(t).
 $$
 
 Поріг вибирається лише на validation. Кандидати - всі різні оцінки та $+\infty$; за однакової вартості береться найбільший поріг:
 
 $$
 \begin{aligned}
-\mathcal{T}&=\mathrm{unique}\{s_i:i\in\mathrm{validation}\}\cup\{+\infty\},\\
+\mathcal{T}&=\mathrm{unique}\lbrace s_i:i\in\mathrm{validation}\rbrace \cup\lbrace +\infty\rbrace ,\\
 C_{\min}&=\min_{t\in\mathcal{T}}C_{\mathrm{val}}(t),\\
-t^*&=\max\{t\in\mathcal{T}:C_{\mathrm{val}}(t)=C_{\min}\}.
+t^*&=\max\lbrace t\in\mathcal{T}:C_{\mathrm{val}}(t)=C_{\min}\rbrace .
 \end{aligned}
 $$
 
