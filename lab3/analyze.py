@@ -127,7 +127,7 @@ def select_errors(rows: list[dict], target: np.ndarray, values: np.ndarray, matr
 def error_figure(data: Path, errors: list[dict], path: Path) -> None:
     if not errors:
         raise ValueError('Немає помилок для рисунка.')
-    fig, axes = plt.subplots(1, len(errors), figsize=(3.3 * len(errors), 3.5), squeeze=False)
+    fig, axes = plt.subplots(1, len(errors), figsize=(3.3 * len(errors), 4.4), squeeze=False)
     for ax, error in zip(axes.flat, errors, strict=True):
         row = {'file': error['file'], 'label': error['true_class'], 'part': 'test'}
         with Image.open(image_path(data, row)) as source:
@@ -137,7 +137,7 @@ def error_figure(data: Path, errors: list[dict], path: Path) -> None:
         ax.set_xticks([])
         ax.set_yticks([])
     fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    fig.savefig(path, dpi=150, bbox_inches='tight')
     plt.close(fig)
 
 

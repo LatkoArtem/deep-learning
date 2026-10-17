@@ -5,6 +5,7 @@ __pycache__/
 .ipynb_checkpoints/
 data/
 tmp/
+lab3/reproduced/
 
 # Dataset and generated results
 creditcard.csv

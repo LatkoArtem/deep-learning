@@ -1,0 +1,229 @@
+{
+  "regime": "unfreeze",
+  "seed": 2,
+  "settings": {
+    "classes": [
+      "buildings",
+      "forest",
+      "glacier",
+      "mountain",
+      "sea",
+      "street"
+    ],
+    "img_size": 160,
+    "dtype": "float32",
+    "rgb": true,
+    "transforms": {
+      "train": "Compose(\n    RandomResizedCrop(size=(160, 160), scale=(0.7, 1.0), ratio=(0.75, 1.3333), interpolation=bilinear, antialias=True)\n    RandomHorizontalFlip(p=0.5)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)",
+      "validation_and_test": "Compose(\n    Resize(size=(160, 160), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)",
+      "random_resized_crop": {
+        "size": [
+          160,
+          160
+        ],
+        "scale": [
+          0.7,
+          1.0
+        ],
+        "ratio": [
+          0.75,
+          1.3333333333333333
+        ],
+        "interpolation": "BILINEAR",
+        "antialias": true
+      },
+      "horizontal_flip_p": 0.5,
+      "resize": {
+        "size": [
+          160,
+          160
+        ],
+        "interpolation": "BILINEAR",
+        "max_size": null,
+        "antialias": true
+      },
+      "to_tensor": true,
+      "normalize": {
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "inplace": false
+      }
+    },
+    "model": {
+      "architecture": "resnet18",
+      "weights": "IMAGENET1K_V1",
+      "fc": {
+        "in_features": 512,
+        "out_features": 6,
+        "bias": true,
+        "initialization": "nn.Linear default"
+      },
+      "zero_init_residual": false,
+      "groups": 1,
+      "width_per_group": 64,
+      "replace_stride_with_dilation": null,
+      "norm_layer": "BatchNorm2d",
+      "batchnorm": {
+        "eps": 1e-05,
+        "momentum": 0.1,
+        "affine": true,
+        "track_running_stats": true
+      },
+      "frozen_eval_modules": [
+        "conv1",
+        "bn1",
+        "layer1",
+        "layer2",
+        "layer3"
+      ]
+    },
+    "parameters": {
+      "regime": "unfreeze",
+      "total": 11179590,
+      "trainable": 8396806,
+      "groups": [
+        {
+          "name": "fc",
+          "numel": 3078,
+          "lr": 0.003,
+          "weight_decay": 0.0001
+        },
+        {
+          "name": "layer4",
+          "numel": 8393728,
+          "lr": 0.0003,
+          "weight_decay": 0.0001
+        }
+      ],
+      "passed": true
+    },
+    "optimizer": {
+      "class": "AdamW",
+      "defaults": {
+        "lr": 0.001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.0001,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null,
+        "decoupled_weight_decay": true
+      }
+    },
+    "loss": {
+      "class": "CrossEntropyLoss",
+      "reduction": "mean",
+      "weight": null,
+      "ignore_index": -100,
+      "label_smoothing": 0.0
+    },
+    "epochs": 8,
+    "steps_per_epoch": 38,
+    "optimizer_steps": 304,
+    "last_train_batch_size": 16,
+    "loader": {
+      "train_batch_size": 32,
+      "validation_test_batch_size": 64,
+      "train_shuffle": true,
+      "validation_test_shuffle": false,
+      "drop_last": false,
+      "num_workers": 0,
+      "generator": null,
+      "custom_sampler": null,
+      "collate_fn": "default_collate",
+      "pin_memory": false,
+      "timeout": 0,
+      "worker_init_fn": null,
+      "multiprocessing_context": null,
+      "prefetch_factor": null,
+      "persistent_workers": false,
+      "in_order": true
+    },
+    "epoch_loss": "sum(batch_loss * batch_size) / 1200",
+    "validation_after_each_epoch": true,
+    "zero_grad_set_to_none": true,
+    "scheduler": null,
+    "gradient_clipping": null,
+    "mixed_precision": false,
+    "early_stopping": false,
+    "checkpoint_selection_by_epoch": false,
+    "class_balancing": false,
+    "torch_num_threads": 6,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true
+  },
+  "git": {
+    "commit": "1b64a1d8bcd9f2beba9e76f2259f3dfee43ba09a",
+    "dirty": true
+  },
+  "split_sha256": "2355c7d27aa1ee5ebd86f5d4a5fa396181a647cd0c5336a4f380ce965a3fd039",
+  "state_sha256": "fce735592f1a111ab402e4ecb91a247b060ac5197cb1c7d3a02d387dc47534da",
+  "versions": {
+    "python": "3.12.0",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "numpy": "2.5.4"
+  },
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.554890205959479,
+      "validation_macro_f1": 0.9021910077823284
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.16005965904643138,
+      "validation_macro_f1": 0.8966631563774757
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.12038096949147681,
+      "validation_macro_f1": 0.8956196967341216
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.09091514497995376,
+      "validation_macro_f1": 0.8914587155244301
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.1318157343318065,
+      "validation_macro_f1": 0.8753761913757989
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.10635957498103381,
+      "validation_macro_f1": 0.8913249126907424
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.08535695099582274,
+      "validation_macro_f1": 0.8786348623558685
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.10879548192024231,
+      "validation_macro_f1": 0.8762067368339936
+    }
+  ],
+  "training_seconds": 73.72973540000021,
+  "timing": "eight training epochs including validation; excludes model setup"
+}

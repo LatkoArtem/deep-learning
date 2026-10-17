@@ -1,0 +1,174 @@
+{
+  "runs": [
+    {
+      "run": 1,
+      "regime": "scratch",
+      "seed": 1,
+      "train_loss": 1.0101668564478556,
+      "validation_macro_f1": 0.4998978671944263,
+      "seconds": 86.74130979999973
+    },
+    {
+      "run": 2,
+      "regime": "frozen",
+      "seed": 1,
+      "train_loss": 0.16547239293654759,
+      "validation_macro_f1": 0.8842012435043274,
+      "seconds": 77.77211829999942
+    },
+    {
+      "run": 3,
+      "regime": "frozen",
+      "seed": 2,
+      "train_loss": 0.17565907140572865,
+      "validation_macro_f1": 0.8785003294351141,
+      "seconds": 77.58340859999953
+    },
+    {
+      "run": 4,
+      "regime": "frozen",
+      "seed": 3,
+      "train_loss": 0.18957171579202017,
+      "validation_macro_f1": 0.8885955696095422,
+      "seconds": 77.20344720000139
+    },
+    {
+      "run": 5,
+      "regime": "unfreeze",
+      "seed": 1,
+      "train_loss": 0.0635093347914517,
+      "validation_macro_f1": 0.8650515372066563,
+      "seconds": 76.9708599000005
+    },
+    {
+      "run": 6,
+      "regime": "unfreeze",
+      "seed": 2,
+      "train_loss": 0.10879548192024231,
+      "validation_macro_f1": 0.8762067368339936,
+      "seconds": 73.72973540000021
+    },
+    {
+      "run": 7,
+      "regime": "unfreeze",
+      "seed": 3,
+      "train_loss": 0.06852958665850262,
+      "validation_macro_f1": 0.8968378141847922,
+      "seconds": 74.61070599999948
+    }
+  ],
+  "effects": {
+    "mean_frozen": 0.8837657141829945,
+    "range_frozen": 0.010095240174428088,
+    "mean_unfreeze": 0.879365362741814,
+    "range_unfreeze": 0.03178627697813596,
+    "R": 0.03178627697813596,
+    "delta_pre": 0.38386784698856824,
+    "delta_unf": -0.004400351441180561,
+    "total_gain": 0.3794674955473877,
+    "pre_exceeds_noise": true,
+    "unfreeze_exceeds_noise": false
+  },
+  "split_sha256": "2355c7d27aa1ee5ebd86f5d4a5fa396181a647cd0c5336a4f380ce965a3fd039",
+  "selected": {
+    "regime": "frozen",
+    "seed": 3,
+    "validation_macro_f1": 0.8885955696095422
+  },
+  "test": {
+    "macro_f1": 0.8912105506575774,
+    "accuracy": 0.8894806924101198,
+    "n": 1502,
+    "accuracy_standard_error": 0.008090071763894462,
+    "confusion_matrix": [
+      [
+        187,
+        2,
+        0,
+        1,
+        2,
+        27
+      ],
+      [
+        0,
+        237,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        215,
+        49,
+        10,
+        2
+      ],
+      [
+        1,
+        0,
+        40,
+        212,
+        10,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1,
+        250,
+        0
+      ],
+      [
+        13,
+        0,
+        0,
+        2,
+        1,
+        235
+      ]
+    ]
+  },
+  "errors": [
+    {
+      "file": "20179.jpg",
+      "true_class": "glacier",
+      "predicted_class": "mountain",
+      "probability": 0.8772055506706238,
+      "pair_count": 49
+    },
+    {
+      "file": "20116.jpg",
+      "true_class": "mountain",
+      "predicted_class": "glacier",
+      "probability": 0.6015408635139465,
+      "pair_count": 40
+    },
+    {
+      "file": "20083.jpg",
+      "true_class": "buildings",
+      "predicted_class": "street",
+      "probability": 0.5935688614845276,
+      "pair_count": 27
+    },
+    {
+      "file": "20353.jpg",
+      "true_class": "street",
+      "predicted_class": "buildings",
+      "probability": 0.8440271019935608,
+      "pair_count": 13
+    },
+    {
+      "file": "20243.jpg",
+      "true_class": "glacier",
+      "predicted_class": "sea",
+      "probability": 0.8069976568222046,
+      "pair_count": 10
+    }
+  ],
+  "code_commits": [
+    "1b64a1d8bcd9f2beba9e76f2259f3dfee43ba09a"
+  ]
+}

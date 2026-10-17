@@ -1,0 +1,6 @@
+file,true_class,predicted_class,probability,pair_count
+20179.jpg,glacier,mountain,0.8772055506706238,49
+20116.jpg,mountain,glacier,0.6015408635139465,40
+20083.jpg,buildings,street,0.5935688614845276,27
+20353.jpg,street,buildings,0.8440271019935608,13
+20243.jpg,glacier,sea,0.8069976568222046,10

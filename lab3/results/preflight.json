@@ -1,0 +1,232 @@
+{
+  "bn_prediction_before_run": "У frozen зі звичайним model.train() параметри кістяка не зміняться, але running_mean, running_var і num_batches_tracked його BN зміняться. Параметри fc зміняться. Спад train-loss сам по собі не виявляє цієї помилки.",
+  "initial_losses": {
+    "scratch": 2.0479493141174316,
+    "frozen": 1.9242374897003174
+  },
+  "uniform_loss": 1.791759469228055,
+  "parameter_checks": [
+    {
+      "regime": "scratch",
+      "total": 11179590,
+      "trainable": 11179590,
+      "groups": [
+        {
+          "name": "all",
+          "numel": 11179590,
+          "lr": 0.003,
+          "weight_decay": 0.0001
+        }
+      ],
+      "passed": true
+    },
+    {
+      "regime": "frozen",
+      "total": 11179590,
+      "trainable": 3078,
+      "groups": [
+        {
+          "name": "fc",
+          "numel": 3078,
+          "lr": 0.003,
+          "weight_decay": 0.0001
+        }
+      ],
+      "passed": true
+    },
+    {
+      "regime": "unfreeze",
+      "total": 11179590,
+      "trainable": 8396806,
+      "groups": [
+        {
+          "name": "fc",
+          "numel": 3078,
+          "lr": 0.003,
+          "weight_decay": 0.0001
+        },
+        {
+          "name": "layer4",
+          "numel": 8393728,
+          "lr": 0.0003,
+          "weight_decay": 0.0001
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "mode_checks": {
+    "frozen": {
+      "modules": [
+        {
+          "module": "conv1",
+          "parameters_changed": false,
+          "bn_statistics_changed": null,
+          "passed": true
+        },
+        {
+          "module": "bn1",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "layer1",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "layer2",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "layer3",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "layer4",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "fc",
+          "parameters_changed": true,
+          "bn_statistics_changed": null,
+          "passed": true
+        }
+      ],
+      "layer1_bn1_max_changes": {
+        "running_mean": 0.0,
+        "running_var": 0.0
+      },
+      "five_step_losses": [
+        1.9242374897003174,
+        1.7652806043624878,
+        1.6138395071029663,
+        1.3874176740646362,
+        1.2886943817138672
+      ]
+    },
+    "unfreeze": {
+      "modules": [
+        {
+          "module": "conv1",
+          "parameters_changed": false,
+          "bn_statistics_changed": null,
+          "passed": true
+        },
+        {
+          "module": "bn1",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "layer1",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "layer2",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "layer3",
+          "parameters_changed": false,
+          "bn_statistics_changed": false,
+          "passed": true
+        },
+        {
+          "module": "layer4",
+          "parameters_changed": true,
+          "bn_statistics_changed": true,
+          "passed": true
+        },
+        {
+          "module": "fc",
+          "parameters_changed": true,
+          "bn_statistics_changed": null,
+          "passed": true
+        }
+      ],
+      "layer1_bn1_max_changes": {
+        "running_mean": 0.0,
+        "running_var": 0.0
+      },
+      "five_step_losses": [
+        1.8966686725616455,
+        1.3416500091552734,
+        1.1648236513137817,
+        0.726433277130127,
+        0.6565102338790894
+      ]
+    }
+  },
+  "bn_bug": {
+    "modules": [
+      {
+        "module": "conv1",
+        "parameters_changed": false,
+        "bn_statistics_changed": null,
+        "passed": true
+      },
+      {
+        "module": "bn1",
+        "parameters_changed": false,
+        "bn_statistics_changed": true,
+        "passed": true
+      },
+      {
+        "module": "layer1",
+        "parameters_changed": false,
+        "bn_statistics_changed": true,
+        "passed": true
+      },
+      {
+        "module": "layer2",
+        "parameters_changed": false,
+        "bn_statistics_changed": true,
+        "passed": true
+      },
+      {
+        "module": "layer3",
+        "parameters_changed": false,
+        "bn_statistics_changed": true,
+        "passed": true
+      },
+      {
+        "module": "layer4",
+        "parameters_changed": false,
+        "bn_statistics_changed": true,
+        "passed": true
+      },
+      {
+        "module": "fc",
+        "parameters_changed": true,
+        "bn_statistics_changed": null,
+        "passed": true
+      }
+    ],
+    "layer1_bn1_max_changes": {
+      "running_mean": 0.09282255172729492,
+      "running_var": 0.12034308910369873
+    },
+    "five_step_losses": [
+      1.886913776397705,
+      1.945674180984497,
+      1.8442530632019043,
+      1.6837364435195923,
+      1.407362699508667
+    ]
+  },
+  "all_passed": true
+}

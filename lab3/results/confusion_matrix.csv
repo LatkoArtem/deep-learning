@@ -1,0 +1,7 @@
+true_class,buildings,forest,glacier,mountain,sea,street
+buildings,187,2,0,1,2,27
+forest,0,237,0,0,0,0
+glacier,0,1,215,49,10,2
+mountain,1,0,40,212,10,0
+sea,2,1,1,1,250,0
+street,13,0,0,2,1,235
