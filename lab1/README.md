@@ -59,7 +59,7 @@ $$
 $$
 \begin{aligned}
 Z_1 &= XW_1+\mathbf{1}_N b_1^{\mathsf T},\\
-A_1 &= \operatorname{ReLU}(Z_1),\\
+A_1 &= \mathrm{ReLU}(Z_1),\\
 Z_2 &= A_1W_2+\mathbf{1}_N b_2^{\mathsf T}.
 \end{aligned}
 $$

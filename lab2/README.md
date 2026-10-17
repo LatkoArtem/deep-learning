@@ -61,10 +61,10 @@ $$
 
 $$
 \begin{aligned}
-h_i &= \operatorname{ReLU}(W_1\widetilde x_i+b_1),
+h_i &= \mathrm{ReLU}(W_1\widetilde x_i+b_1),
 & h_i&\in\mathbb{R}^{32},\\
 z_i &= w_2^{\mathsf T}h_i+b_2,
-& s_i&=\operatorname{sigmoid}(z_i).
+& s_i&=\mathrm{sigmoid}(z_i).
 \end{aligned}
 $$
 
@@ -108,7 +108,7 @@ $$
 
 $$
 \begin{aligned}
-\mathcal{T}&=\operatorname{unique}\{s_i:i\in\mathrm{validation}\}\cup\{+\infty\},\\
+\mathcal{T}&=\mathrm{unique}\{s_i:i\in\mathrm{validation}\}\cup\{+\infty\},\\
 C_{\min}&=\min_{t\in\mathcal{T}}C_{\mathrm{val}}(t),\\
 t^*&=\max\{t\in\mathcal{T}:C_{\mathrm{val}}(t)=C_{\min}\}.
 \end{aligned}
