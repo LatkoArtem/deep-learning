@@ -75,16 +75,14 @@ def brute_force_table(y: np.ndarray, scores: np.ndarray) -> pd.DataFrame:
     return pd.DataFrame([add_cost(counts(y, scores, threshold)) for threshold in thresholds])
 
 
-def same_threshold(left: float, right: float) -> bool:
-    return (np.isinf(left) and np.isinf(right)) or np.isclose(left, right)
-
-
 def json_row(row: pd.Series | dict) -> dict:
     values = row.to_dict() if isinstance(row, pd.Series) else row
     result = {}
     for key, value in values.items():
         if key == "threshold" and np.isinf(float(value)):
             result[key] = "+inf"
+        elif key in ("tp", "fp", "fn", "tn", "cost"):
+            result[key] = int(value)
         elif isinstance(value, np.generic):
             result[key] = value.item()
         else:
@@ -124,9 +122,13 @@ def check_toy_sets() -> tuple[pd.DataFrame, pd.DataFrame]:
         )
         fast_best = choose_best(fast)
         direct_best = choose_best(direct)
+        thresholds_match = np.array_equal(
+            fast["threshold"].to_numpy(), direct["threshold"].to_numpy()
+        )
         selected_match = (
             counters_match
-            and same_threshold(float(fast_best["threshold"]), float(direct_best["threshold"]))
+            and thresholds_match
+            and float(fast_best["threshold"]) == float(direct_best["threshold"])
         )
         if not selected_match:
             raise AssertionError(f"Перевірка набору {name} не пройдена.")
@@ -140,6 +142,7 @@ def check_toy_sets() -> tuple[pd.DataFrame, pd.DataFrame]:
             "tn": int(fast_best["tn"]),
             "cost": int(fast_best["cost"]),
             "counters_match": counters_match,
+            "thresholds_match": thresholds_match,
             "selected_match": selected_match,
         })
         for row_fast, row_direct in zip(
@@ -222,11 +225,7 @@ def safe_rate(numerator: int, denominator: int) -> float | None:
     return None if denominator == 0 else numerator / denominator
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--saved", type=Path, required=True)
-    args = parser.parse_args()
-    out = args.saved
+def analyze_saved(out: Path) -> dict:
     data = load_predictions(out)
     y_validation = data["validation_y"]
     s_validation = data["validation_scores"]
@@ -243,6 +242,8 @@ def main() -> None:
         {"rule": "minimum_cost", **best.to_dict()},
         {"rule": "all_negative", **add_cost(counts(y_validation, s_validation, float("inf")))},
     ])
+    count_columns = ["tp", "fp", "fn", "tn", "cost"]
+    comparison[count_columns] = comparison[count_columns].astype(np.int64)
     comparison.rename(columns={
         "tp": "TP", "fp": "FP", "fn": "FN", "tn": "TN", "cost": "C"
     }).to_csv(out / "validation_threshold_comparison.csv", index=False)
@@ -280,6 +281,14 @@ def main() -> None:
         json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
         encoding="utf-8",
     )
+    return report
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--saved", type=Path, required=True)
+    args = parser.parse_args()
+    report = analyze_saved(args.saved)
     print(json.dumps(report, ensure_ascii=False, indent=2))
 
 

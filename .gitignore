@@ -2,12 +2,15 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.ipynb_checkpoints/
 
 # Dataset and generated results
 creditcard.csv
 results/
 lab1/results/
 lab2/results/
+lab2/results_retrained/
+lab2/notebook_results/
 *.pt
 *.npz
 
