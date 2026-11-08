@@ -1,0 +1,152 @@
+{
+  "environment": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "AMD Ryzen 5 6600H with Radeon Graphics",
+    "cpu_vector_capability": "AVX2",
+    "python": "3.12.0",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "onnx": "1.20.1",
+    "onnxruntime": "1.29.0",
+    "numpy": "2.5.4",
+    "threads": 1,
+    "provider": "CPUExecutionProvider",
+    "batch_size": 1,
+    "power_line": "battery"
+  },
+  "data": {
+    "train_count": 1200,
+    "train_filename_sum": 11993084,
+    "test_count": 1502,
+    "test_filename_sum": 33351444,
+    "calibration": {
+      "count": 200,
+      "filename_sum": 1921470,
+      "class_counts": {
+        "buildings": 40,
+        "forest": 35,
+        "glacier": 36,
+        "mountain": 33,
+        "sea": 29,
+        "street": 27
+      }
+    }
+  },
+  "export": {
+    "max_abs_logit_difference": 1.1444091796875e-05,
+    "class_agreement": 1.0,
+    "pytorch_macro_f1": 0.8912105506575774,
+    "onnx_fp32_macro_f1": 0.8912105506575774,
+    "conv_nodes": 20,
+    "batch_normalization_nodes": 0,
+    "seconds": 2.0732429000199772
+  },
+  "quantization": {
+    "seconds": 13.382171200006269
+  },
+  "quality": {
+    "pytorch_fp32": {
+      "macro_f1": 0.8912105506575774,
+      "accuracy": 0.8894806924101198
+    },
+    "onnx_fp32": {
+      "macro_f1": 0.8912105506575774,
+      "accuracy": 0.8894806924101198
+    },
+    "int8_per_channel": {
+      "macro_f1": 0.8797092506162301,
+      "accuracy": 0.8768308921438083,
+      "agreement_with_fp32": 0.9387483355525965,
+      "b_int8_correct_fp32_wrong": 35,
+      "c_int8_wrong_fp32_correct": 54,
+      "delta_accuracy": -0.012649800266311573,
+      "paired_se": 0.006280946159824636,
+      "two_se_count_threshold": 18.867962264113206,
+      "noise_rule_passed": false,
+      "single_model_se": 0.008090071763894462
+    },
+    "int8_per_tensor": {
+      "macro_f1": 0.8931068103784782,
+      "accuracy": 0.8914780292942743,
+      "agreement_with_fp32": 0.9793608521970706,
+      "b_int8_correct_fp32_wrong": 16,
+      "c_int8_wrong_fp32_correct": 13,
+      "delta_accuracy": 0.001997336884154488,
+      "paired_se": 0.003585329432180096,
+      "two_se_count_threshold": 10.770329614269007,
+      "noise_rule_passed": true,
+      "single_model_se": 0.008090071763894462
+    }
+  },
+  "weight_ranges": {
+    "convolution_count": 20,
+    "top3": [
+      {
+        "node": "/conv1/Conv",
+        "r": 6.668345928192139,
+        "median_channel_max": 0.05906644091010094
+      },
+      {
+        "node": "/layer3/layer3.1/conv2/Conv",
+        "r": 5.895690441131592,
+        "median_channel_max": 0.16454745829105377
+      },
+      {
+        "node": "/layer3/layer3.0/downsample/downsample.0/Conv",
+        "r": 4.920561790466309,
+        "median_channel_max": 0.08295013010501862
+      }
+    ],
+    "median_r": 3.444852828979492,
+    "median_channel_cost_bits": 1.7844423494210573
+  },
+  "per_tensor_experiment_seconds": 8.578989400004502,
+  "latency": {
+    "fp32": {
+      "file_mb": 44.708866,
+      "p50_ms": 32.86985000886489,
+      "p95_ms": 37.650784995639704,
+      "round_p50_ms": [
+        32.874700002139434,
+        32.797350009786896,
+        32.90990000823513
+      ],
+      "round_p95_ms": [
+        38.106419998803176,
+        37.62384501314955,
+        37.47304999415064
+      ],
+      "measurement_count": 300,
+      "warmup_count": 20
+    },
+    "int8": {
+      "file_mb": 11.296862,
+      "p50_ms": 18.975599989062175,
+      "p95_ms": 21.56394999328768,
+      "round_p50_ms": [
+        18.567200007964857,
+        19.380749989068136,
+        18.943850009236485
+      ],
+      "round_p95_ms": [
+        20.143490011105314,
+        21.78901999432128,
+        21.41185000218684
+      ],
+      "measurement_count": 300,
+      "warmup_count": 20
+    },
+    "speedup_p50": 1.7322166375667472,
+    "round_p50_ranges_ms": {
+      "fp32": [
+        32.797350009786896,
+        32.90990000823513
+      ],
+      "int8": [
+        18.567200007964857,
+        19.380749989068136
+      ]
+    },
+    "change_measurable": true
+  }
+}

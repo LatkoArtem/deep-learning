@@ -6,6 +6,7 @@ __pycache__/
 data/
 tmp/
 lab3/reproduced/
+lab4/*.onnx
 
 # Dataset and generated results
 creditcard.csv
