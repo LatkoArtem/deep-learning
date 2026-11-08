@@ -2,27 +2,40 @@
 
 Обчислювальний експеримент із ResNet-18 на Intel Image Classification: scratch, frozen та unfreeze за однакового бюджету у 304 кроки.
 
+## Підготовка після клонування
+
+Датасет [Intel Image Classification](https://www.kaggle.com/datasets/puneet6060/intel-image-classification) не зберігається в GitHub. Його потрібно окремо завантажити з Kaggle і розпакувати так, щоб у корені репозиторію були шляхи:
+
+```text
+data/intel-image-classification/seg_train/seg_train/<class>/*.jpg
+data/intel-image-classification/seg_test/seg_test/<class>/*.jpg
+```
+
+Checkpoint, `split.csv`, журнали запусків і готові результати вже включені до репозиторію. Для відтворення збереженого аналізу повторно навчати моделі не потрібно. Якщо набір лежить в іншому місці, передай фактичний шлях через `--data`.
+
 ## Запуск
 
-З кореня репозиторію:
+Команди нижче починаються з кореня клонованого репозиторію. Перейди до ЛР3 і створи середовище:
 
 ```powershell
 cd lab3
 uv sync --locked --python 3.12
 ```
 
-Датасет: [Intel Image Classification](https://www.kaggle.com/datasets/puneet6060/intel-image-classification). Розпакуй `seg_train` і `seg_test` у локальну теку. Наприклад, для розташування `../data/intel-image-classification/seg_train/seg_train/<клас>/*.jpg` і такої самої вкладеності `seg_test` дві команди мають вигляд:
+Залишаючись у теці `lab3`, відтворити записаний у репозиторії звіт можна так:
+
+```powershell
+uv run --locked python analyze.py --data ../data/intel-image-classification --out .
+```
+
+Для нового повного навчання використовуй окрему теку `reproduced`, щоб не зачепити збережені результати:
 
 ```powershell
 uv run --locked python train.py --data ../data/intel-image-classification --out reproduced
 uv run --locked python analyze.py --data ../data/intel-image-classification --out reproduced
 ```
 
-`--data` можна замінити на абсолютний шлях до свого набору. Навчання використовує CUDA, MPS або CPU, залежно від доступності. Наявні результати не перезаписуються; `reproduced` має бути новою текою. Для відтворення **збережених у цьому репозиторії** чисел достатньо команди аналізу:
-
-```powershell
-uv run --locked python analyze.py --data ../data/intel-image-classification --out .
-```
+Навчання використовує CUDA, MPS або CPU, залежно від доступності. Якщо датасет лежить не у `../data/intel-image-classification`, заміни шлях у командах на свій.
 
 Виконане навчання запускалося з `--out . --device cuda`. Аналіз завжди обчислює test на CPU. Повторення аналізу дозволене, але не є підставою змінювати модель.
 

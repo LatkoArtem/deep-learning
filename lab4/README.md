@@ -4,19 +4,35 @@
 
 Експортувати модель ResNet-18 з ЛР3 у ONNX, виконати статичну INT8-квантизацію після навчання та порівняти точність, розмір файлів і затримку на CPU.
 
+## Підготовка після клонування
+
+Для роботи потрібні Python 3.12, [`uv`](https://docs.astral.sh/uv/getting-started/installation/) і датасет Intel Image Classification. Сам датасет не зберігається в GitHub. Завантаж його з [Kaggle](https://www.kaggle.com/datasets/puneet6060/intel-image-classification) і розпакуй так, щоб від кореня репозиторію були шляхи:
+
+```text
+data/intel-image-classification/seg_train/seg_train/<class>/*.jpg
+data/intel-image-classification/seg_test/seg_test/<class>/*.jpg
+```
+
+Можна використати інше розташування; тоді передай його у `--data`. Checkpoint `lab3/lab3_model.pt` і поділ `lab3/split.csv` уже входять до клонованого репозиторію.
+
 ## Запуск
 
-Потрібні Python 3.12, `uv` і розпакований Intel Image Classification у `../data/intel-image-classification`. Скрипт бере checkpoint і поділ із ЛР3, перевіряє контрольні суми вибірок, експортує моделі й записує всі результати в `lab4_results.json`.
+Команди нижче починаються з кореня клонованого репозиторію. Спершу створи середовище ЛР4:
 
 ```powershell
 cd lab4
 uv sync --locked --python 3.12
+```
+
+Залишаючись у теці `lab4`, виконай експеримент:
+
+```powershell
 uv run --locked python lab4.py --model ../lab3/lab3_model.pt --split ../lab3/split.csv --data ../data/intel-image-classification --out .
 ```
 
-Перший запуск створює локальні `.onnx` і `lab4_results.json`; ці результати не додаються до Git. Notebook `lab4.ipynb` показує той самий протокол і читає готовий JSON.
+Скрипт перевіряє дані, експортує моделі та записує повний звіт у `lab4_results.json`. Він також створює `.onnx` файли, які ігноруються Git. JSON вже збережений у репозиторії; повторний запуск оновить його у твоїй робочій копії.
 
-Після створення `lab4_results.json` відкрити notebook можна так:
+Notebook `lab4.ipynb` показує протокол і читає JSON. Після створення JSON, залишаючись у теці `lab4`, відкрий його так:
 
 ```powershell
 uv run --locked --with jupyter --with ipykernel jupyter notebook lab4.ipynb
@@ -59,7 +75,7 @@ $$
 
 $$
 \alpha_c=\max |W_c|,\qquad
-r=\frac{\max_c\alpha_c}{\operatorname{median}_c\alpha_c},\qquad
+r=\frac{\max_c\alpha_c}{\mathrm{median}_c\alpha_c},\qquad
 \Delta b\approx\log_2(r).
 $$
 
